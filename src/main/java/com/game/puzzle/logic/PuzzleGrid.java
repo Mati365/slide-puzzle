@@ -34,28 +34,41 @@ public class PuzzleGrid {
     public PuzzleGrid(@NotNull ImageTile tile) {
         this.tile = tile;
         this.puzzles = PuzzleGrid.extractPuzzles(tile);
-        this.shuffle();
     }
 
     public ImageTile getTile() { return tile; }
 
-    public ArrayIterator<PuzzleDescription> getPuzzles() { return this.puzzles; }
+    public ArrayIterator<PuzzleDescription> getPuzzles() { return puzzles; }
+
+    /**
+     * Find one not ordered, if null all slides are correct
+     *
+     * @return  True if all puzzles are ordered from min to max
+     */
+    public boolean isOrdered() {
+        final Point wrongPuzzle = puzzles.find(
+                (element, x, y) -> element != null && element.getNumber() != (y * this.puzzles.getSize().width) + x
+        );
+        return wrongPuzzle == null;
+    }
 
     /**
      * Reorder slides, be sure that null field is
      * in the right bottom corner
      */
     public void shuffle() {
-        this.puzzles.shuffle();
+        puzzles.shuffle();
 
         /**
          * at least one null slide have to
          * be placed in right corner
          */
-        Point nullSlide = this.puzzles.find((element, x, y) -> element == null);
+        Point nullSlide = puzzles.find(
+                (element, x, y) -> element == null
+        );
         if (nullSlide != null) {
-            this.puzzles.array[nullSlide.y][nullSlide.x] = this.puzzles.array[this.puzzles.getSize().height - 1][this.puzzles.getSize().width -  1];
-            this.puzzles.array[this.puzzles.getSize().height - 1][this.puzzles.getSize().width -  1] = null;
+            puzzles.array[nullSlide.y][nullSlide.x] = puzzles.array[puzzles.getSize().height - 1][puzzles.getSize().width -  1];
+            puzzles.array[puzzles.getSize().height - 1][puzzles.getSize().width -  1] = null;
         }
     }
 
@@ -66,11 +79,11 @@ public class PuzzleGrid {
      * @return  True if slide is success
      */
     public boolean slide(Point p) throws ArrayIndexOutOfBoundsException {
-        if (p.x >= this.puzzles.getSize().width || p.y >= this.puzzles.getSize().height)
+        if (p.x >= puzzles.getSize().width || p.y >= puzzles.getSize().height)
             return false;
 
         /** if there is no free edges abort sliding */
-        final EnumSet<Direction> movableEdges = this.getMovableEdges(p);
+        final EnumSet<Direction> movableEdges = getMovableEdges(p);
         if (movableEdges.isEmpty())
             return false;
 
@@ -80,8 +93,8 @@ public class PuzzleGrid {
                 .next();
 
         /** swap is always null, do not create temp variable */
-        this.puzzles.array[p.y + direction.offsetY][p.x + direction.offsetX] = this.puzzles.array[p.y][p.x];
-        this.puzzles.array[p.y][p.x] = null;
+        puzzles.array[p.y + direction.offsetY][p.x + direction.offsetX] = puzzles.array[p.y][p.x];
+        puzzles.array[p.y][p.x] = null;
         return true;
     }
 
@@ -90,7 +103,7 @@ public class PuzzleGrid {
      * @return  True if edge can be moveable
      */
     private EnumSet<Direction> getMovableEdges(Point p) {
-        final Dimension boardSize = this.puzzles.getSize();
+        final Dimension boardSize = puzzles.getSize();
         EnumSet<Direction> movableEdges = EnumSet.noneOf(Direction.class);
 
         for (Direction dir : Direction.values()) {
@@ -98,7 +111,7 @@ public class PuzzleGrid {
                     && dir.offsetY + p.y < boardSize.height
                     && dir.offsetX + p.x >= 0
                     && dir.offsetY + p.y >= 0
-                    && this.puzzles.array[p.y + dir.offsetY][p.x + dir.offsetX] == null) {
+                    && puzzles.array[p.y + dir.offsetY][p.x + dir.offsetX] == null) {
                 movableEdges.add(dir);
             }
         }

@@ -1,7 +1,6 @@
 package com.game.puzzle.logic;
 
 import javax.validation.constraints.NotNull;
-import java.sql.Time;
 import java.util.concurrent.*;
 
 /**
@@ -26,24 +25,26 @@ public class SecondsTimer {
     public SecondsTimer(@NotNull TimerHandler handler) {
         this.handler = handler;
         this.executor = Executors.newScheduledThreadPool(1);
-        this.executor.scheduleAtFixedRate(() -> {
-            handler.timerUpdated(++seconds);
-        }, 0, 1, TimeUnit.SECONDS);
+        this.executor.scheduleAtFixedRate(
+                () -> handler.timerUpdated(++seconds),
+                0, 1,
+                TimeUnit.SECONDS
+        );
     }
 
     /**
      * Sets remain seconds to 0
      */
     public void resetTimer() {
-        this.seconds = 0;
-        this.handler.timerUpdated(this.seconds);
+        seconds = 0;
+        handler.timerUpdated(seconds);
     }
 
     /**
      * Stop timer and resets values
      */
     public void stop() {
-        this.executor.shutdown();
-        this.resetTimer();
+        executor.shutdown();
+        resetTimer();
     }
 }

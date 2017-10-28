@@ -23,9 +23,9 @@ public class ImageTile {
         );
     }
 
-    public Image getImage() { return this.image; }
+    public Image getImage() { return image; }
 
-    public ArrayIterator<BufferedImage> getTiles() { return this.tiles; }
+    public ArrayIterator<BufferedImage> getTiles() { return tiles; }
 
     /**
      * Tests dimensions object

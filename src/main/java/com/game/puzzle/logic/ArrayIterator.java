@@ -32,7 +32,7 @@ public class ArrayIterator<T> {
      * @param size  Size of array
      */
     @SuppressWarnings("unchecked")
-    public ArrayIterator(Class<? extends T> cls, @NotNull Dimension size) {
+    ArrayIterator(Class<? extends T> cls, @NotNull Dimension size) {
         this.size = size;
         this.array = (T[][])Array.newInstance(cls, size.width, size.height);
     }
@@ -43,12 +43,12 @@ public class ArrayIterator<T> {
      * @param array 2D array used in class
      * @param size  Size of array
      */
-    public ArrayIterator(T[][] array, @NotNull Dimension size) {
+    private ArrayIterator(T[][] array, @NotNull Dimension size) {
         this.size = size;
         this.array = array;
     }
 
-    public Dimension getSize() { return this.size; }
+    public Dimension getSize() { return size; }
 
     /**
      * Random shuffle 2D array
@@ -58,12 +58,12 @@ public class ArrayIterator<T> {
 
         return this.map(
                 (element, x, y) -> {
-                    final int x1 = localRandom.nextInt(0, this.size.height);
-                    final int y1 = localRandom.nextInt(0, this.size.width);
+                    final int x1 = localRandom.nextInt(0, size.height);
+                    final int y1 = localRandom.nextInt(0, size.width);
 
-                    final T temp = this.array[y1][x1];
-                    this.array[y1][x1] = element;
-                    this.array[y][x] = temp;
+                    final T temp = array[y1][x1];
+                    array[y1][x1] = element;
+                    array[y][x] = temp;
                     return null;
                 }
         );
@@ -75,11 +75,11 @@ public class ArrayIterator<T> {
      * @param iterator  Function called every iterate
      */
     public ArrayIterator<T> map(Iterator<T> iterator) {
-        for (int i = this.size.height - 1; i >= 0; --i) {
-            for (int j = this.size.width - 1; j >= 0; --j) {
-                T newValue = iterator.iterate(this.array[i][j], j, i);
+        for (int i = size.height - 1; i >= 0; --i) {
+            for (int j = size.width - 1; j >= 0; --j) {
+                T newValue = iterator.iterate(array[i][j], j, i);
                 if (newValue != null)
-                    this.array[i][j] = newValue;
+                    array[i][j] = newValue;
             }
         }
         return this;
@@ -90,9 +90,9 @@ public class ArrayIterator<T> {
      * @return  Value coordinate inside array
      */
     public Point find(FilterIterator<T> iterator) {
-        for (int i = this.size.height - 1; i >= 0; --i) {
-            for (int j = this.size.width - 1; j >= 0; --j) {
-                if (iterator.iterate(this.array[i][j], j, i))
+        for (int i = size.height - 1; i >= 0; --i) {
+            for (int j = size.width - 1; j >= 0; --j) {
+                if (iterator.iterate(array[i][j], j, i))
                     return new Point(j, i);
             }
         }
@@ -100,11 +100,12 @@ public class ArrayIterator<T> {
     }
 
     /**
-     * Make array iterator
-     * @param size
-     * @param array
-     * @param iterator
-     * @param <K>
+     * Foreach existing array
+     *
+     * @param size      2D size of array
+     * @param array     Array object
+     * @param iterator  Map functor
+     * @param <K>       Fluent api object
      */
     public static <K> ArrayIterator<K> map(K[][] array, Dimension size, Iterator<K> iterator) {
         ArrayIterator<K> wrapped = new ArrayIterator<K>(array, size);

@@ -18,7 +18,7 @@ public class PuzzleDescription {
         this.image = image;
     }
 
-    public Image getImage() { return this.image; }
+    public Image getImage() { return image; }
 
-    public int getNumber() { return this.number; }
+    public int getNumber() { return number; }
 }

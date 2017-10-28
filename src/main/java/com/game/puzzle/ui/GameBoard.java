@@ -4,6 +4,7 @@ import com.game.puzzle.logic.ImageTile;
 import com.game.puzzle.logic.PuzzleGrid;
 
 import javax.swing.*;
+import javax.validation.constraints.NotNull;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -30,33 +31,84 @@ interface MouseClickListener extends MouseListener {
  * Graphical swing representation of PuzzleGrid component
  */
 public class GameBoard extends JPanel {
+    @FunctionalInterface
+    interface BoardListener {
+        void puzzleOrdered();
+    }
+
+    /** Constants */
     private static final Dimension BOARD_SIZE = new Dimension(3, 3);
     private static final int PUZZLE_SPACING = 4;
 
     private PuzzleGrid grid = null;
+    private BoardListener boardListener = null;
+    private boolean disabled;
 
-    public GameBoard() {
+    public GameBoard(boolean disabled) {
         super();
         this.grid = GameBoard.getRandomPuzzleGrid();
+        this.disabled = disabled;
 
-        this.setLayout(null);
-        this.setBackground(Color.WHITE);
-        this.addMouseListener((MouseClickListener)(e -> {
-            this.grid.slide(
-                this.getPuzzleIndex(e)
-            );
-            this.repaint();
-        }));
+        setLayout(null);
+        setBackground(Color.WHITE);
+        addMouseListener(
+                (MouseClickListener)(this::triggerSlide)
+        );
     }
 
-    public PuzzleGrid getGrid() { return grid; }
+    /**
+     * Disable any changes in board
+     *
+     * @param disabled  Disabled flag
+     */
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+        repaint();
+    }
+
+    /**
+     * @param boardListener Listener called on game board state change
+     */
+    public void addBoardListener(@NotNull BoardListener boardListener) {
+        this.boardListener = boardListener;
+    }
+
+    /**
+     * Trigger slide, if user not change any slide do not repaint
+     *
+     * @param e Mouse event
+     */
+    private void triggerSlide(MouseEvent e) {
+        if (disabled)
+            return;
+
+        final boolean slided = grid.slide(
+                getPuzzleIndex(e)
+        );
+        if (!slided)
+            return;
+
+        repaint();
+        if (grid.isOrdered()) {
+            if (boardListener != null)
+                boardListener.puzzleOrdered();
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    Resources.Translations.getString("win_dialog"),
+                    Resources.Translations.getString("win_title"),
+                    JOptionPane.INFORMATION_MESSAGE,
+                    Resources.getIcon("checked")
+            );
+        }
+    }
 
     /**
      * Reorder puzzles and repaint component
      */
-    public void shuffle() {
-        this.grid.shuffle();
-        this.repaint();
+    void shuffle() {
+        grid.shuffle();
+        repaint();
     }
 
     /**
@@ -65,8 +117,8 @@ public class GameBoard extends JPanel {
      */
     private Point getPuzzleIndex(MouseEvent e) {
         return new Point(
-            e.getX() / this.getPuzzleSize().width,
-            e.getY() / this.getPuzzleSize().height
+            e.getX() / getPuzzleSize().width,
+            e.getY() / getPuzzleSize().height
         );
     }
 
@@ -74,10 +126,10 @@ public class GameBoard extends JPanel {
      * @return  Single puzzle size relative to JPanel board size, its not image size
      */
     private Dimension getPuzzleSize() {
-        final Dimension GRID_SIZE = this.grid.getPuzzles().getSize();
+        final Dimension GRID_SIZE = grid.getPuzzles().getSize();
         return new Dimension(
-                this.getSize().width / GRID_SIZE.width,
-                this.getSize().height / GRID_SIZE.height
+                getSize().width / GRID_SIZE.width,
+                getSize().height / GRID_SIZE.height
         );
     }
 
@@ -101,13 +153,21 @@ public class GameBoard extends JPanel {
     }
 
     /**
+     * @param alpha Opacity value between 0-1
+     * @return      Composite object
+     */
+    private static AlphaComposite makeAlphaComposite(@NotNull float alpha) {
+        return AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
+    }
+
+    /**
      * Draw puzzle grid
      *
      * @param g Graphics
      */
     @Override
     public void paint (Graphics g) {
-        if (this.grid == null)
+        if (grid == null)
             return;
 
         super.paint(g);
@@ -116,12 +176,12 @@ public class GameBoard extends JPanel {
          * Draw background
          */
         final Graphics2D imgContext = (Graphics2D) g.create();
-        imgContext.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .15f));
+        imgContext.setComposite(GameBoard.makeAlphaComposite(.15f));
         imgContext.drawImage(
-            this.grid.getTile().getImage(),
+            grid.getTile().getImage(),
                 0, 0,
-                this.getSize().width,
-                this.getSize().height,
+                getSize().width,
+                getSize().height,
                 null
         );
         imgContext.dispose();
@@ -129,10 +189,10 @@ public class GameBoard extends JPanel {
         /**
          * Draw game grid
          */
-        final Dimension puzzleSize = this.getPuzzleSize();
+        final Dimension puzzleSize = getPuzzleSize();
         final Graphics2D g2 = (Graphics2D) g;
 
-        this.grid.getPuzzles().map((puzzle, x, y) -> {
+        grid.getPuzzles().map((puzzle, x, y) -> {
             if (puzzle != null) {
                 final BufferedImage img = (BufferedImage) puzzle.getImage();
                 g2.drawImage(
@@ -146,5 +206,15 @@ public class GameBoard extends JPanel {
             }
             return null;
         });
+
+        /**
+         * Draw disabled layer
+         */
+        if (disabled) {
+            final Graphics2D layerContext = (Graphics2D) g.create();
+            layerContext.setColor(new Color(255, 255, 255, 160));
+            layerContext.fillRect(0, 0, getWidth(), getHeight());
+            layerContext.dispose();
+        }
     }
 }
