@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.game.puzzle</OriginalElement>
+  <nodes>
+    <node x="182.88113162878824" y="1342.0">com.game.puzzle.ui.GamePanel</node>
+    <node x="1111.3727982954551" y="910.0">com.game.puzzle.ui.GameBoard</node>
+    <node x="1155.2018465909093" y="0.0">com.game.puzzle.logic.ArrayIterator.FilterIterator</node>
+    <node x="1595.451846590909" y="369.0">com.game.puzzle.logic.PuzzleGrid.Direction</node>
+    <node x="10.5" y="1042.5">com.game.puzzle.ui.IconButton</node>
+    <node x="953.8246212121212" y="101.0">com.game.puzzle.logic.ArrayIterator</node>
+    <node x="950.2018465909093" y="0.0">com.game.puzzle.logic.ArrayIterator.Iterator</node>
+    <node x="685.8307528409096" y="390.5">com.game.puzzle.logic.ImageTile</node>
+    <node x="519.0" y="678.5">com.game.puzzle.ui.Resources.Translations</node>
+    <node x="884.6496212121212" y="668.0">com.game.puzzle.ui.MouseClickListener</node>
+    <node x="233.5" y="1009.5">com.game.puzzle.logic.SecondsTimer</node>
+    <node x="1322.451846590909" y="413.0">com.game.puzzle.logic.PuzzleDescription</node>
+    <node x="1190.275" y="623.0">com.game.puzzle.logic.PuzzleGrid</node>
+    <node x="1643.275" y="701.0">com.game.puzzle.ui.GameBoard.BoardListener</node>
+    <node x="107.32462121212131" y="424.5">com.game.puzzle.ui.Resources</node>
+    <node x="200.88113162878824" y="1687.0">com.game.puzzle.ui.GameWindow</node>
+    <node x="257.0" y="701.0">com.game.puzzle.logic.SecondsTimer.TimerHandler</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.game.puzzle.logic.ArrayIterator.FilterIterator" target="com.game.puzzle.logic.ArrayIterator">
+      <point x="56.49999999999994" y="25.5" />
+      <point x="1324.701846590909" y="76.0" />
+      <point x="1295.0746212121212" y="76.0" />
+      <point x="146.25000000000006" y="-104.0" />
+    </edge>
+    <edge source="com.game.puzzle.logic.PuzzleGrid" target="com.game.puzzle.logic.ArrayIterator">
+      <point x="-108.25" y="-103.5" />
+      <point x="1298.525" y="603.0" />
+      <point x="1300.951846590909" y="603.0" />
+      <point x="1300.951846590909" y="349.0" />
+      <point x="1181.3246212121212" y="349.0" />
+      <point x="32.5" y="104.0" />
+    </edge>
+    <edge source="com.game.puzzle.ui.GamePanel" target="com.game.puzzle.ui.Resources.Translations">
+      <point x="49.5" y="-147.5" />
+      <point x="364.38113162878824" y="1302.0" />
+      <point x="563.5" y="1302.0" />
+      <point x="-91.0" y="48.0" />
+    </edge>
+    <edge source="com.game.puzzle.ui.GameWindow" target="com.game.puzzle.ui.Resources.Translations">
+      <point x="76.0" y="-48.0" />
+      <point x="390.88113162878824" y="1662.0" />
+      <point x="615.5" y="1662.0" />
+      <point x="615.5" y="890.0" />
+      <point x="655.5" y="890.0" />
+      <point x="0.0" y="48.0" />
+    </edge>
+    <edge source="com.game.puzzle.logic.ImageTile" target="com.game.puzzle.logic.ArrayIterator">
+      <point x="-186.0" y="-70.5" />
+      <point x="778.8307528409096" y="339.0" />
+      <point x="986.3246212121212" y="339.0" />
+      <point x="-162.5" y="104.0" />
+    </edge>
+    <edge source="com.game.puzzle.ui.GameBoard" target="com.game.puzzle.ui.Resources.Translations">
+      <point x="-156.36363636363626" y="-181.0" />
+      <point x="1127.0091619318187" y="890.0" />
+      <point x="746.5" y="890.0" />
+      <point x="91.0" y="48.0" />
+    </edge>
+    <edge source="com.game.puzzle.ui.IconButton" target="com.game.puzzle.ui.Resources">
+      <point x="0.0" y="-48.5" />
+      <point x="111.5" y="603.0" />
+      <point x="186.82462121212131" y="603.0" />
+      <point x="-53.0" y="36.5" />
+    </edge>
+    <edge source="com.game.puzzle.ui.Resources.Translations" target="com.game.puzzle.ui.Resources">
+      <point x="0.0" y="-48.0" />
+      <point x="655.5" y="603.0" />
+      <point x="292.8246212121213" y="603.0" />
+      <point x="53.0" y="36.5" />
+    </edge>
+    <edge source="com.game.puzzle.logic.ArrayIterator" target="com.game.puzzle.logic.ArrayIterator.Iterator">
+      <point x="-146.25" y="-104.0" />
+      <point x="1002.5746212121212" y="76.0" />
+      <point x="996.4518465909093" y="76.0" />
+      <point x="-46.25" y="25.5" />
+    </edge>
+    <edge source="com.game.puzzle.logic.PuzzleGrid" target="com.game.puzzle.logic.PuzzleGrid.Direction">
+      <point x="151.54999999999995" y="-103.5" />
+      <point x="1558.325" y="593.0" />
+      <point x="1639.701846590909" y="593.0" />
+      <point x="-44.25" y="92.0" />
+    </edge>
+    <edge source="com.game.puzzle.ui.GameBoard" target="com.game.puzzle.ui.GameBoard.BoardListener">
+      <point x="93.81818181818176" y="-181.0" />
+      <point x="1377.1909801136367" y="870.0" />
+      <point x="1676.275" y="870.0" />
+      <point x="-66.0" y="25.5" />
+    </edge>
+    <edge source="com.game.puzzle.ui.GamePanel" target="com.game.puzzle.logic.SecondsTimer">
+      <point x="16.5" y="-147.5" />
+      <point x="331.38113162878824" y="1292.0" />
+      <point x="450.25" y="1292.0" />
+      <point x="72.25" y="81.5" />
+    </edge>
+    <edge source="com.game.puzzle.ui.GamePanel" target="com.game.puzzle.ui.Resources">
+      <point x="-49.5" y="-147.5" />
+      <point x="265.38113162878824" y="1302.0" />
+      <point x="223.0" y="1302.0" />
+      <point x="223.0" y="603.0" />
+      <point x="239.82462121212131" y="603.0" />
+      <point x="0.0" y="36.5" />
+    </edge>
+    <edge source="com.game.puzzle.ui.GamePanel" target="com.game.puzzle.ui.IconButton">
+      <point x="-115.5" y="-147.5" />
+      <point x="199.38113162878824" y="1322.0" />
+      <point x="61.0" y="1322.0" />
+      <point x="-50.5" y="48.5" />
+    </edge>
+    <edge source="com.game.puzzle.ui.GameWindow" target="com.game.puzzle.ui.GamePanel">
+      <point x="0.0" y="-48.0" />
+      <point x="0.0" y="147.5" />
+    </edge>
+    <edge source="com.game.puzzle.logic.PuzzleGrid" target="com.game.puzzle.logic.PuzzleDescription">
+      <point x="64.95000000000005" y="-103.5" />
+      <point x="1471.7250000000001" y="573.0" />
+      <point x="1532.451846590909" y="573.0" />
+      <point x="84.0" y="48.0" />
+    </edge>
+    <edge source="com.game.puzzle.ui.GameBoard.BoardListener" target="com.game.puzzle.ui.GameBoard">
+      <point x="66.00000000000011" y="25.5" />
+      <point x="1808.275" y="890.0" />
+      <point x="1439.7364346590916" y="890.0" />
+      <point x="156.3636363636365" y="-181.0" />
+    </edge>
+    <edge source="com.game.puzzle.ui.GameBoard" target="com.game.puzzle.logic.PuzzleGrid">
+      <point x="31.272727272727252" y="-181.0" />
+      <point x="1314.6455255681822" y="850.0" />
+      <point x="1406.775" y="850.0" />
+      <point x="0.0" y="103.5" />
+    </edge>
+    <edge source="com.game.puzzle.ui.GameWindow" target="com.game.puzzle.ui.Resources">
+      <point x="-76.0" y="-48.0" />
+      <point x="238.88113162878824" y="1662.0" />
+      <point x="0.0" y="1662.0" />
+      <point x="0.0" y="593.0" />
+      <point x="133.82462121212131" y="593.0" />
+      <point x="-106.0" y="36.5" />
+    </edge>
+    <edge source="com.game.puzzle.logic.ArrayIterator.Iterator" target="com.game.puzzle.logic.ArrayIterator">
+      <point x="46.25" y="25.5" />
+      <point x="1088.9518465909093" y="76.0" />
+      <point x="1100.0746212121212" y="76.0" />
+      <point x="-48.75" y="-104.0" />
+    </edge>
+    <edge source="com.game.puzzle.ui.GameBoard" target="com.game.puzzle.ui.MouseClickListener">
+      <point x="-31.272727272727252" y="-181.0" />
+      <point x="1252.1000710227277" y="850.0" />
+      <point x="1024.1496212121212" y="850.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="com.game.puzzle.logic.SecondsTimer.TimerHandler" target="com.game.puzzle.logic.SecondsTimer">
+      <point x="80.66666666666669" y="25.5" />
+      <point x="458.6666666666667" y="890.0" />
+      <point x="474.3333333333333" y="890.0" />
+      <point x="96.33333333333331" y="-81.5" />
+    </edge>
+    <edge source="com.game.puzzle.logic.PuzzleGrid.Direction" target="com.game.puzzle.logic.PuzzleGrid">
+      <point x="44.25" y="92.0" />
+      <point x="1728.201846590909" y="603.0" />
+      <point x="1601.625" y="603.0" />
+      <point x="194.8499999999999" y="-103.5" />
+    </edge>
+    <edge source="com.game.puzzle.ui.GameBoard" target="com.game.puzzle.logic.ImageTile">
+      <point x="-62.545454545454504" y="-181.0" />
+      <point x="1220.8273437500006" y="860.0" />
+      <point x="848.2018465909093" y="860.0" />
+      <point x="848.2018465909093" y="603.0" />
+      <point x="895.0807528409096" y="603.0" />
+      <point x="-69.75" y="70.5" />
+    </edge>
+    <edge source="com.game.puzzle.logic.ArrayIterator" target="com.game.puzzle.logic.ArrayIterator.FilterIterator">
+      <point x="48.75" y="-104.0" />
+      <point x="1197.5746212121212" y="76.0" />
+      <point x="1211.7018465909093" y="76.0" />
+      <point x="-56.5" y="25.5" />
+    </edge>
+    <edge source="com.game.puzzle.logic.PuzzleGrid" target="com.game.puzzle.logic.ImageTile">
+      <point x="-151.55000000000018" y="-103.5" />
+      <point x="1255.225" y="593.0" />
+      <point x="1174.0807528409096" y="593.0" />
+      <point x="209.25" y="70.5" />
+    </edge>
+    <edge source="com.game.puzzle.logic.SecondsTimer" target="com.game.puzzle.logic.SecondsTimer.TimerHandler">
+      <point x="0.0" y="-81.5" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="com.game.puzzle.ui.GamePanel" target="com.game.puzzle.ui.GameBoard">
+      <point x="115.5" y="-147.5" />
+      <point x="430.38113162878824" y="1322.0" />
+      <point x="1369.3727982954551" y="1322.0" />
+      <point x="86.0" y="181.0" />
+    </edge>
+    <edge source="com.game.puzzle.ui.GameBoard" target="com.game.puzzle.ui.Resources">
+      <point x="-125.09090909090901" y="-181.0" />
+      <point x="1158.2818892045461" y="880.0" />
+      <point x="802.5" y="880.0" />
+      <point x="802.5" y="593.0" />
+      <point x="345.8246212121213" y="593.0" />
+      <point x="106.0" y="36.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5000000000000001" x="590.9999999999998" y="190.9999999999999" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+    <Category>Constructors</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
