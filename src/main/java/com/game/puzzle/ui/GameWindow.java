@@ -9,7 +9,7 @@ import java.awt.Dimension;
  * place there any logic
  */
 public class GameWindow extends JFrame {
-    private static final Dimension WINDOW_SIZE = new Dimension(400, 500);
+    private static final Dimension WINDOW_SIZE = new Dimension(402, 500);
 
     /**
      * Create base game window, set game layer

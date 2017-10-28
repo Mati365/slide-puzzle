@@ -38,7 +38,7 @@ public class GameBoard extends JPanel {
 
     /** Constants */
     private static final Dimension BOARD_SIZE = new Dimension(3, 3);
-    private static final int PUZZLE_SPACING = 4;
+    private static final int PUZZLE_SPACING = 2;
 
     private PuzzleGrid grid = null;
     private BoardListener boardListener = null;
@@ -141,7 +141,7 @@ public class GameBoard extends JPanel {
 
         try {
             tile = new ImageTile(
-                    Resources.getImage("cat.jpg"),
+                    Resources.getImage("puzzle-image.jpg"),
                     BOARD_SIZE,
                     null
             );
