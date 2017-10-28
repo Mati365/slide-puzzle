@@ -3,14 +3,15 @@ package com.game.puzzle.ui;
 import com.game.puzzle.logic.ImageTile;
 import com.game.puzzle.logic.PuzzleGrid;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.net.URL;
 
+/**
+ * Callback with only mouseClick listener
+ */
 interface MouseClickListener extends MouseListener {
     @Override
     default void mousePressed(MouseEvent e) {}
@@ -29,7 +30,7 @@ interface MouseClickListener extends MouseListener {
  * Graphical swing representation of PuzzleGrid component
  */
 public class GameBoard extends JPanel {
-    private static final Dimension BOARD_SIZE = new Dimension(4, 4);
+    private static final Dimension BOARD_SIZE = new Dimension(3, 3);
     private static final int PUZZLE_SPACING = 4;
 
     private PuzzleGrid grid = null;
@@ -46,6 +47,16 @@ public class GameBoard extends JPanel {
             );
             this.repaint();
         }));
+    }
+
+    public PuzzleGrid getGrid() { return grid; }
+
+    /**
+     * Reorder puzzles and repaint component
+     */
+    public void shuffle() {
+        this.grid.getPuzzles().shuffle();
+        this.repaint();
     }
 
     /**
@@ -73,13 +84,12 @@ public class GameBoard extends JPanel {
     /**
      * @return  Shuffled random tile with image
      */
-    private static final PuzzleGrid getRandomPuzzleGrid() {
-        final URL imageResource = GameBoard.class.getResource("/images/cat.jpg");
+    private static PuzzleGrid getRandomPuzzleGrid() {
         ImageTile tile = null;
 
         try {
             tile = new ImageTile(
-                    ImageIO.read(imageResource),
+                    Resources.getImage("cat.jpg"),
                     BOARD_SIZE,
                     null
             );

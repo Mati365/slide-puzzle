@@ -3,13 +3,16 @@ package com.game.puzzle.ui;
 import com.game.puzzle.logic.SecondsTimer;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import javax.swing.border.EmptyBorder;
 
 /**
  * Main game layer
  */
 public class GamePanel extends JPanel {
+    private SecondsTimer timer = null;
+    private GameBoard board = new GameBoard();
+
     public GamePanel() {
         super();
         this.setLayout(new BorderLayout());
@@ -21,8 +24,15 @@ public class GamePanel extends JPanel {
      * Create whole Panel UI
      */
     private void createLayout() {
-        this.add(this.createTimeTooltip(), BorderLayout.NORTH);
-        this.add(new GameBoard(), BorderLayout.CENTER);
+        JPanel topBar = new JPanel(new BorderLayout());
+        topBar.add(this.createTimeTooltip(), BorderLayout.WEST);
+        topBar.add(this.createShuffleButton(), BorderLayout.EAST);
+        topBar.setBorder(
+                BorderFactory.createEmptyBorder(0, 0, 5, 0)
+        );
+
+        this.add(topBar, BorderLayout.NORTH);
+        this.add(this.board, BorderLayout.CENTER);
     }
 
     /**
@@ -31,15 +41,41 @@ public class GamePanel extends JPanel {
      */
     private JLabel createTimeTooltip() {
         JLabel timeTooltip = new JLabel("0", SwingConstants.CENTER);
-        timeTooltip.setBorder(
-                BorderFactory.createEmptyBorder(0, 0, 10, 0)
+        timeTooltip.setIconTextGap(10);
+        timeTooltip.setIcon(
+                Resources.getIcon("wall-clock")
         );
-        new SecondsTimer(seconds -> {
+
+        this.timer = new SecondsTimer(seconds -> {
             SwingUtilities.invokeLater(
                     () -> timeTooltip.setText(Resources.Translations.getString("game_time", seconds))
             );
             return false;
         });
         return timeTooltip;
+    }
+
+    /**
+     * @return  Button object
+     */
+    private JButton createShuffleButton() {
+        final JButton shuffleButton = new JButton();
+
+        shuffleButton.setBorderPainted(false);
+        shuffleButton.setIcon(
+                Resources.getIcon("refresh")
+        );
+        shuffleButton.setPreferredSize(
+                new Dimension(32, 32)
+        );
+        shuffleButton.addActionListener(
+                (e) -> {
+                    this.board.shuffle();
+                    if (this.timer != null)
+                        this.timer.resetTimer();
+                }
+        );
+
+        return shuffleButton;
     }
 }
