@@ -70,9 +70,10 @@ public class GamePanel extends JPanel {
         );
         shuffleButton.addActionListener(
                 (e) -> {
-                    this.board.shuffle();
                     if (this.timer != null)
                         this.timer.resetTimer();
+
+                    this.board.shuffle();
                 }
         );
 

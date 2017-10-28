@@ -33,14 +33,31 @@ public class PuzzleGrid {
      */
     public PuzzleGrid(@NotNull ImageTile tile) {
         this.tile = tile;
-        this.puzzles = PuzzleGrid
-                .extractPuzzles(tile)
-                .shuffle();
+        this.puzzles = PuzzleGrid.extractPuzzles(tile);
+        this.shuffle();
     }
 
     public ImageTile getTile() { return tile; }
 
     public ArrayIterator<PuzzleDescription> getPuzzles() { return this.puzzles; }
+
+    /**
+     * Reorder slides, be sure that null field is
+     * in the right bottom corner
+     */
+    public void shuffle() {
+        this.puzzles.shuffle();
+
+        /**
+         * at least one null slide have to
+         * be placed in right corner
+         */
+        Point nullSlide = this.puzzles.find((element, x, y) -> element == null);
+        if (nullSlide != null) {
+            this.puzzles.array[nullSlide.y][nullSlide.x] = this.puzzles.array[this.puzzles.getSize().height - 1][this.puzzles.getSize().width -  1];
+            this.puzzles.array[this.puzzles.getSize().height - 1][this.puzzles.getSize().width -  1] = null;
+        }
+    }
 
     /**
      * Slide puzzle, swap with first found null place

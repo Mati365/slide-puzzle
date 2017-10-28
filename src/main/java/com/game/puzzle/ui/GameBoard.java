@@ -55,7 +55,7 @@ public class GameBoard extends JPanel {
      * Reorder puzzles and repaint component
      */
     public void shuffle() {
-        this.grid.getPuzzles().shuffle();
+        this.grid.shuffle();
         this.repaint();
     }
 

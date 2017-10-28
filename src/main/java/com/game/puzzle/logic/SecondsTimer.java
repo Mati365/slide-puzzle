@@ -1,6 +1,7 @@
 package com.game.puzzle.logic;
 
 import javax.validation.constraints.NotNull;
+import java.sql.Time;
 import java.util.concurrent.*;
 
 /**
@@ -20,8 +21,10 @@ public class SecondsTimer {
 
     private long seconds = 0;
     private ScheduledExecutorService executor = null;
+    private TimerHandler handler = null;
 
     public SecondsTimer(@NotNull TimerHandler handler) {
+        this.handler = handler;
         this.executor = Executors.newScheduledThreadPool(1);
         this.executor.scheduleAtFixedRate(() -> {
             handler.timerUpdated(++seconds);
@@ -33,6 +36,7 @@ public class SecondsTimer {
      */
     public void resetTimer() {
         this.seconds = 0;
+        this.handler.timerUpdated(this.seconds);
     }
 
     /**

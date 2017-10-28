@@ -17,6 +17,11 @@ public class ArrayIterator<T> {
         T iterate(T obj, int x, int y);
     }
 
+    @FunctionalInterface
+    public interface FilterIterator<T> {
+        boolean iterate(T obj, int x, int y);
+    }
+
     private Dimension size;
     public T[][] array;
 
@@ -78,6 +83,20 @@ public class ArrayIterator<T> {
             }
         }
         return this;
+    }
+
+    /**
+     * @param iterator  Function called every iterate
+     * @return  Value coordinate inside array
+     */
+    public Point find(FilterIterator<T> iterator) {
+        for (int i = this.size.height - 1; i >= 0; --i) {
+            for (int j = this.size.width - 1; j >= 0; --j) {
+                if (iterator.iterate(this.array[i][j], j, i))
+                    return new Point(j, i);
+            }
+        }
+        return null;
     }
 
     /**
