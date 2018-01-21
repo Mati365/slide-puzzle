@@ -37,7 +37,7 @@ public class GameBoard extends JPanel {
     }
 
     /** Constants */
-    private static final Dimension BOARD_SIZE = new Dimension(3, 3);
+    private static final Dimension BOARD_SIZE = new Dimension(4, 4);
     private static final int PUZZLE_SPACING = 2;
 
     private PuzzleGrid grid = null;
