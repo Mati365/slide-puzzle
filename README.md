@@ -1,6 +1,9 @@
 # slide-puzzle
 Java Swing 4x4 slide puzzle game.
 
+### Build
+`mvn package`
+
 ### Class diagram
 ![Class diagram](src/main/doc/mockup.png?raw=true "Mockup")
 
