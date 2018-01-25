@@ -68,7 +68,7 @@ Menedżer zasobów aplikacji. Pozwala na internationalizację aplikacji, wczytyw
 Ikony stworzone przez <a href="http://www.freepik.com" title="Freepik">Freepik</a> z <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> licencjonowane przez <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
 
 ### Autorzy
-Mateusz Bagiński <cziken58@gmail.com>
+Mateusz Bagiński <cziken58@gmail.com> <br />
 Artur Jakiel
 
 ### Licencja 
