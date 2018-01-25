@@ -58,6 +58,9 @@ Klasy rysujące okienko i zapewniające mu prawidłowy layout.
 + Klasa _Resources_
 Menedżer zasobów aplikacji. Pozwala na internationalizację aplikacji, wczytywanie obrazków oraz ikon. Pozwala na formatowanie translacji.
 
+### Podsumowanie
+Projekt został zrealizowany zgodnie z pierwotnymi założeniami a podczas jego implementacji nie natrafiono na żadne trudności.
+
 ### Zbudowanie paczki
 `mvn package`
 
